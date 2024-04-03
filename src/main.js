@@ -8,13 +8,14 @@ function dom() {
     for (var key in data) {
         if (data.hasOwnProperty(key)) {
             var row = tbody.insertRow();
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
+            var cell_uuid = row.insertCell(0);
+            var cell_name = row.insertCell(1);
+            var cell_controls = row.insertCell(2);
 
-            cell1.innerHTML = key;
-            cell2.innerHTML = data[key]['name'];
+            cell_uuid.innerHTML = key;
+            cell_name.innerHTML = data[key]['name'];
 
+            ///////////////////////////////////////////////////////////////////
             var button1 = document.createElement("button");
             button1.innerHTML = "<i class='icons10-controller'></i>启动";
             button1.className = "app-btn app-btn-success";
@@ -22,17 +23,52 @@ function dom() {
             button1.onclick = function () {
                 window.open(`https://www.ccw.site/player/${key}`)
             };
-            cell3.appendChild(button1);
+            cell_controls.appendChild(button1);
 
             var button2 = document.createElement("button");
-            button2.innerHTML = "<i class='icons10-cross'></i>移除";
-            button2.className = "app-btn app-btn-danger";
+            button2.innerHTML = "<i class='icons10-pencil'></i>编辑";
+            button2.className = "app-btn app-btn-primary";
+            button2.style.marginRight = "5px";
             button2.onclick = function () {
+                window.open(`https://www.ccw.site/gandi/project/${key}`)
+            };
+            cell_controls.appendChild(button2);
+
+            var button3 = document.createElement("button");
+            button3.innerHTML = "<i class='icons10-controller'></i>参数启动";
+            button3.className = "app-btn app-btn-outline-success";
+            button3.style.marginRight = "5px";
+            button3.onclick = function () {
+                var result = prompt("启动参数");
+                if (result != null) {
+                    window.open(`https://www.ccw.site/player/${key}?kontakt=${btoa(result)}`);
+                }
+            };
+            cell_controls.appendChild(button3);
+            
+            var button4 = document.createElement("button");
+            button4.innerHTML = "<i class='icons10-pencil'></i>参数编辑";
+            button4.className = "app-btn app-btn-outline-primary";
+            button4.style.marginRight = "5px";
+            button4.onclick = function () {
+                var result = prompt("编辑参数");
+                if (result != null) {
+                    window.open(`https://www.ccw.site/gandi/project/${key}?kontakt=${btoa(result)}`);
+                }
+            };
+            cell_controls.appendChild(button4);
+
+            var button5 = document.createElement("button");
+            button5.innerHTML = "<i class='icons10-cross'></i>移除";
+            button5.className = "app-btn app-btn-danger";
+            button5.style.marginRight = "5px";
+            button5.onclick = function () {
                 delete data[key];
                 tbody.deleteRow(row.rowIndex - 1);
                 saveData();
             };
-            cell3.appendChild(button2);
+            cell_controls.appendChild(button5);
+            ///////////////////////////////////////////////////////////////////
         }
     }
 }
