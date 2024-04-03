@@ -1,0 +1,181 @@
+<head>
+    <meta charset="utf-8">
+    <link href="../src/windows-ui.min.css" rel="stylesheet">
+    <link href="../src/winui-icons.min.css" rel="stylesheet">
+    <link href="../src/winui-icons.slim.css" rel="stylesheet">
+    <link href="../src/app-config.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 25px;
+        }
+    </style>
+    <script src="../src/main.js"></script>
+</head>
+
+<body
+    onload="document.getElementById('theme').className = Appearance.getColorScheme() === 'light' ? 'icons10-sun' : 'icons10-moon'; loadData(); dom();">
+    <div>
+        <div class="app-input-container" style="float: left; margin-right: 10px;">
+            <input class="app-input-text" type="text" placeholder="项目ID" id="uuid">
+        </div>
+        <div class="app-input-container" style="float: left; margin-right: 10px;">
+            <input class="app-input-text" type="text" placeholder="项目备注" id="name">
+        </div>
+        <button class="app-btn app-btn-primary" type="button" style="float: left; margin-right: 10px;"
+            onclick="genDataset()">
+            <i class="icons10-plus"></i>
+            <span>添加项目</span>
+        </button>
+        <div class="app-cmdbar-menu">
+            <div class="app-cmdbar-menu-trigger" data-win-toggle="dropdown" data-win-target="#fileSys">
+                <button class="app-btn app-btn-outline-primary">
+                    <i class="icons10-angle-down app-color-primary"></i>
+                    <span>配置文件</span>
+                </button>
+            </div>
+            <ul class="app-cmdbar-menu-list" id="fileSys">
+                <li class="cmdbar-menu-list-item">
+                    <a href="#" id="download"><i class="icons10-download"></i>导出文件</a>
+                </li>
+                <li class="cmdbar-menu-list-item">
+                    <a href="#" id="upload"><i class="icons10-upload"></i>导入文件</a>
+                </li>
+            </ul>
+        </div>
+
+        <button class="app-btn app-btn-default" type="button" style="float: right;margin-left: 5px;"
+            onclick="changeTheme()"><i id="theme"></i></button>
+        <button class="app-btn app-btn-primary" type="button" style="float: right;" data-win-toggle="modal"
+            data-win-target="#about">
+            <i class="icons10-info"></i>
+            <span>关于此项目</span>
+        </button>
+        <div class="app-dialog" id="about" data-win-toggle="modal" data-win-target="#about" tabindex="-1">
+            <div class="app-dialog-modal" aria-modal="true" role="dialog">
+                <div class="app-dialog-header">
+                    <h3>关于此项目</h3>
+                </div>
+                <div class="app-dialog-body">
+                    <li class="app-list-item">
+                        <a>
+                            <img alt="image" style="display: none;">
+                            <div class="app-list-item-container">
+                                <span class="app-list-title"><i class="icons10-code-file"></i>项目版本</span>
+                                <p class="app-list-subtitle">CCW-Launcher-Fluent Web v1.0.0</p>
+                            </div>
+                        </a>
+                        <div style="flex: 0.2 1 0%;"></div>
+                    </li>
+                    <li class="app-list-item">
+                        <a href="https://github.com/dilemmagx">
+                            <img alt="image" style="display: none;">
+                            <div class="app-list-item-container">
+                                <span class="app-list-title"><i class="icons10-user"></i>开发者</span>
+                                <p class="app-list-subtitle">DilemmaGX @ Github</p>
+                            </div>
+                        </a>
+                        <div style="flex: 0.2 1 0%;"></div>
+                    </li>
+                    <li class="app-list-item">
+                        <a href="https://github.com/dilemmagx/ccw-launcher-fluent">
+                            <img alt="image" style="display: none;">
+                            <div class="app-list-item-container">
+                                <span class="app-list-title"><i class="icons10-bookmark"></i>代码仓库</span>
+                                <p class="app-list-subtitle">DilemmaGX / ccw-launcher-fluent</p>
+                            </div>
+                        </a>
+                        <div style="flex: 0.2 1 0%;"></div>
+                    </li>
+                    <li class="app-list-item">
+                        <a href="https://github.com/virtualvivek/windows-ui">
+                            <img alt="image" style="display: none;">
+                            <div class="app-list-item-container">
+                                <span class="app-list-title"><i class="icons10-window"></i>UI组件</span>
+                                <p class="app-list-subtitle">virtualvivek / windows-ui</p>
+                            </div>
+                        </a>
+                        <div style="flex: 0.2 1 0%;"></div>
+                    </li>
+                    <li class="app-list-item">
+                        <a href="https://github.com/little-starts/ccw-launcher">
+                            <img alt="image" style="display: none;">
+                            <div class="app-list-item-container">
+                                <span class="app-list-title"><i class="icons10-network"></i>友链仓库</span>
+                                <p class="app-list-subtitle">little-starts / CCW-Launcher</p>
+                            </div>
+                        </a>
+                        <div style="flex: 0.2 1 0%;"></div>
+                    </li>
+                    <li class="app-list-item">
+                        <a>
+                            <img alt="image" style="display: none;">
+                            <div class="app-list-item-container">
+                                <span class="app-list-title"><i class="icons10-heart"></i>支持作者</span>
+                                <p class="app-list-subtitle">暂未开通</p>
+                            </div>
+                        </a>
+                        <div style="flex: 0.2 1 0%;"></div>
+                    </li>
+                </div>
+                <div class="app-dialog-footer">
+                    <button class="app-btn" type="button" data-win-toggle="modal" data-win-target="#about">
+                        <span>Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <div>
+        <div class="app-table-view-container" align="center">
+            <table class="app-table-view" style="min-width: 95vw;" id="t">
+                <thead>
+                    <tr>
+                        <th align="left" style="width: 40%;">项目ID</th>
+                        <th align="left" style="width: 40%;">项目备注</th>
+                        <th align="left" style="width: 20%;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../src/windows-ui.min.js"></script>
+    <script>
+        var download = document.getElementById('download');
+        download.addEventListener('click', function (event) {
+            let str = JSON.stringify(data);
+            let blob = new Blob([str], { type: "application/json" });
+            let url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.style.display = "none";
+            a.href = url;
+            a.download = "user.data";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        })
+        var upload = document.getElementById('upload');
+        function uploadFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = function (event) {
+                const file = event.target.files[0];
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    console.log(e.target.result)
+                    data = JSON.parse(e.target.result);
+                    saveData();
+                    dom();
+                }
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        upload.addEventListener('click', function (event) {
+            uploadFile();
+        })
+    </script>
+</body>
