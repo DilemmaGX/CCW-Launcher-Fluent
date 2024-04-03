@@ -35,7 +35,7 @@ function dom() {
             cell_controls.appendChild(button2);
 
             var button3 = document.createElement("button");
-            button3.innerHTML = "<i class='icons10-controller'></i>参数启动";
+            button3.innerHTML = "<i class='icons10-controller'></i>含参启动";
             button3.className = "app-btn app-btn-outline-success";
             button3.style.marginRight = "5px";
             button3.onclick = function () {
@@ -47,7 +47,7 @@ function dom() {
             cell_controls.appendChild(button3);
             
             var button4 = document.createElement("button");
-            button4.innerHTML = "<i class='icons10-pencil'></i>参数编辑";
+            button4.innerHTML = "<i class='icons10-pencil'></i>含参编辑";
             button4.className = "app-btn app-btn-outline-primary";
             button4.style.marginRight = "5px";
             button4.onclick = function () {
